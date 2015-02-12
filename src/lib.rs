@@ -98,4 +98,11 @@ pub mod dpqueue_tests {
 
         assert!(*queue.dequeue_p1().unwrap() == "Testing!");
     }
+
+    #[test]
+    fn can_dequeue_while_empty() {
+        let mut queue = DualPriorityQueue::<usize, usize, usize>::new();
+
+        assert!(None == queue.dequeue_p1());
+    }
 }
