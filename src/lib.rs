@@ -30,10 +30,10 @@ pub mod dpqueue {
             });
         }
 
-        pub fn dequeue_p1(&mut self) -> Option<T> { self.dequeue(|item| item.p1) }
-        pub fn dequeue_p2(&mut self) -> Option<T> { self.dequeue(|item| item.p2) }
+        pub fn dequeue_p1(&mut self) -> Option<T> { self.dequeue_by(|item| item.p1) }
+        pub fn dequeue_p2(&mut self) -> Option<T> { self.dequeue_by(|item| item.p2) }
 
-        fn dequeue<P, F: Fn(&DualPriorityQueueItem<T, P1, P2>) -> P>(&mut self, f: F) -> Option<T>
+        pub fn dequeue_by<P, F: Fn(&DualPriorityQueueItem<T, P1, P2>) -> P>(&mut self, f: F) -> Option<T>
             where P: Copy + Default + Ord
         {
             let (_, max_idx, _) = self.items.iter().fold((0, 0, Default::default()), |(idx, max_idx, priority), dpq_item| {
@@ -78,5 +78,15 @@ pub mod dpqueue_tests {
         assert!(queue.dequeue_p1().unwrap() == "Bob.");
         assert!(queue.dequeue_p2().unwrap() == "1, 2, 3.");
         assert!(queue.dequeue_p1().unwrap() == "Testing!");
+    }
+
+    #[test]
+    fn can_dequeue_by() {
+        let mut queue = DualPriorityQueue::new();
+
+        queue.enqueue("Testing!", 1, 1);
+        queue.enqueue("1, 2, 3.", 2, 2);
+
+        assert!(queue.dequeue_by(|item| if item.p1 % 2 == 0 { item.p1 } else { item.p1 * 3 }).unwrap() == "Testing!");
     }
 }
