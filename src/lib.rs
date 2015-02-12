@@ -64,7 +64,7 @@ pub mod dpqueue_tests {
         queue.enqueue("1, 2, 3.", 6, 5);
 
         assert!(queue.items[0].item == "Testing!");
-        assert!(queue.items[1].item == "1, 2, 3.")
+        assert!(queue.items[1].item == "1, 2, 3.");
     }
 
     #[test]
