@@ -5,7 +5,7 @@ pub mod dpqueue {
     use std::default::Default;
 
     pub struct DualPriorityQueueItem<T, P1, P2> {
-        pub item: Box<T>,
+        pub item: T,
         pub p1: P1,
         pub p2: P2
     }
@@ -24,7 +24,7 @@ pub mod dpqueue {
 
         pub fn enqueue(&mut self, item: T, p1: P1, p2: P2) {
             self.items.push(DualPriorityQueueItem {
-                item: box item,
+                item: item,
                 p1: p1,
                 p2: p2,
             });
@@ -44,7 +44,7 @@ pub mod dpqueue {
             });
 
             if self.items.len() > max_idx {
-                Some(*self.items.swap_remove(max_idx).item)
+                Some(self.items.swap_remove(max_idx).item)
             } else {
                 None
             }
@@ -63,8 +63,8 @@ pub mod dpqueue_tests {
         queue.enqueue("Testing!", 5, 6);
         queue.enqueue("1, 2, 3.", 6, 5);
 
-        assert!(*queue.items[0].item == "Testing!");
-        assert!(*queue.items[1].item == "1, 2, 3.")
+        assert!(queue.items[0].item == "Testing!");
+        assert!(queue.items[1].item == "1, 2, 3.")
     }
 
     #[test]
