@@ -3,7 +3,7 @@ DualPriorityQueue
 
 From: [Daily Programmer #201](http://www.reddit.com/r/dailyprogrammer/comments/2vkwgb/20150211_challenge_201_practical_exercise_get/)
 
-This implementation of a priority queue in rust is based on two structs: the queue itself and a queue item. The queue item stores two priorities and a reference to the boxed item, while the queue holds onto a vector filled with queue items and provides a nice place for me to hook up the functions necessary to make this work.
+This implementation of a priority queue in rust is based on two structs: the queue itself and a queue item. The queue item stores two priorities and the item itself, while the queue holds onto a vector filled with queue items and provides a nice place for me to hook up the functions necessary to make this work.
 
 Functions exported by the DualPriorityQueue are: `enqueue()`, `dequeue_p1()`, and `dequeue_p2()`. Both public dequeue functions actually just call a private `dequeue()` function which takes as a parameter a second function whose role is to select the right priority. (That part was fun for me.)
 
