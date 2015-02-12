@@ -89,4 +89,13 @@ pub mod dpqueue_tests {
 
         assert!(queue.dequeue_by(|item| if item.p1 % 2 == 0 { item.p1 } else { item.p1 * 3 }).unwrap() == "Testing!");
     }
+
+    #[test]
+    fn can_store_boxed_items() {
+        let mut queue = DualPriorityQueue::new();
+
+        queue.enqueue(box "Testing!", 1, 2);
+
+        assert!(*queue.dequeue_p1().unwrap() == "Testing!");
+    }
 }
