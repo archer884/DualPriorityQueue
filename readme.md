@@ -11,6 +11,6 @@ I wanted to implement a `dequeue_by()` function which would accept some user-pro
 
 This was actually a lot of fun to implement, and it was easier than I really expected it to be. I guess I'm getting used to Rust. And, of course, the guys working on it have been chipping away at the rough edges pretty diligently since I started working with it... If you browse through my code real quick, you can really see the effects of that: none of it looks ridiculously arcane and most of it no longer resembles line noise.
 
-Update: `dequeue_by()` has totally been implemented--specifically by exporting the existing `dequeue()` function and changing its name.
+Update: `dequeue_by()` has totally been implemented--specifically by exporting the existing `dequeue()` function and changing its name. As I mentioned, the functionality is limited, but that doesn't mean it's worthless: you can do some weird things with your priority function if you want to. Like, for example, in my test code, odd values are given priority over the next even value. :P
 
 Update: `DualPriorityQueueItem` no longer boxes its contents. If you want to store the data right there in the vector, that's perfectly fine with me. (Makes plenty of sense, actually.) I mostly just did it the other way to see if I could write it that way. Also added a test in here to make sure you can box your own items if you want. It's not like I didn't think it would work, but, still--nice to have the test.
